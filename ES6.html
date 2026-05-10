@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <h1>Todo List (Local Storage)</h1>
+  <input type="text" id="taskInput" placeholder="new work">
+  <button id="addBtn">add</button>
+  <ul id="taskList"></ul>
+</body>
+<script>
+
+  let taskInput = document.querySelector("#taskInput");
+  let addBtn = document.querySelector("#addBtn");
+  let taskList = document.querySelector("#taskList");
+
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+  function displayTodos() {
+    taskList.innerHTML = "";
+
+    todos.forEach((todo, index) => {
+      let li = document.createElement("li");
+      li.textContent = todo;
+
+      let deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "delete";
+      deleteBtn.addEventListener("click", () => {
+        deleteTodo(index);
+
+      });
+      li.appendChild(deleteBtn);
+      taskList.appendChild(li);
+    })
+  }
+  function addTodo() {
+    let task = taskInput.value.trim();
+
+    if (task === "") {
+      alert("কিছু লিখুন!");
+      return;
+    }
+
+    todos.push(task);
+    localStorage.setItem("todos", JSON.stringify(todos));
+
+    taskInput.value = "";
+    displayTodos();
+  }
+
+  // Todo মুছা
+  function deleteTodo(index) {
+    todos.splice(index, 1);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    displayTodos();
+  }
+
+  // Event listeners
+  addBtn.addEventListener("click", addTodo);
+  taskInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      addTodo();
+    }
+  });
+
+  // প্রথমবার load
+  displayTodos();
+</script>
+
+</html>

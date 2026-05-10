@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cart-count {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: green;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .products,
+    .cart {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 350px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product,
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin: 10px 0;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .add-btn {
+      background: green;
+    }
+
+    .remove-btn {
+      background: red;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Shopping Cart</h1>
+
+  <div class="cart-count">
+    Cart Items: <span id="cartCount">0</span>
+  </div>
+
+  <div class="container">
+
+    <!-- Product List -->
+    <div class="products">
+
+      <h2>Products</h2>
+
+      <div class="product">
+        <span>Apple</span>
+        <button class="add-btn" onclick="addToCart('Apple')">Add</button>
+      </div>
+
+      <div class="product">
+        <span>Mango</span>
+        <button class="add-btn" onclick="addToCart('Mango')">Add</button>
+      </div>
+
+      <div class="product">
+        <span>Banana</span>
+        <button class="add-btn" onclick="addToCart('Banana')">Add</button>
+      </div>
+
+      <div class="product">
+        <span>Orange</span>
+        <button class="add-btn" onclick="addToCart('Orange')">Add</button>
+      </div>
+
+    </div>
+
+    <!-- Cart -->
+    <div class="cart">
+
+      <h2>My Cart</h2>
+
+      <div id="cartItems"></div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const cartItems = document.querySelector("#cartItems");
+    const cartCount = document.querySelector("#cartCount");
+
+    // Render Cart
+    function renderCart() {
+
+      cartItems.innerHTML = "";
+
+      cart.forEach((item, index) => {
+
+        let div = document.createElement("div");
+        div.classList.add("cart-item");
+
+        div.innerHTML = `
+          <span>${item}</span>
+          <button class="remove-btn" onclick="removeItem(${index})">
+            Remove
+          </button>
+        `;
+
+        cartItems.appendChild(div);
+
+      });
+
+      cartCount.textContent = cart.length;
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    // Add To Cart
+    function addToCart(product) {
+
+      cart.push(product);
+
+      renderCart();
+    }
+
+    // Remove Item
+    function removeItem(index) {
+
+      cart.splice(index, 1);
+
+      renderCart();
+    }
+
+    // Initial Render
+    renderCart();
+
+  </script>
+
+</body>
+
+</html>
