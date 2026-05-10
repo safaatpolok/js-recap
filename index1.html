@@ -1,0 +1,73 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      transition: background-color 0.3s;
+    }
+
+    .color-btn {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>রং পরিবর্তন করুন</h1>
+  <button class="color-btn" style="background-color: red; color: white;">লাল</button>
+  <button class="color-btn" style="background-color: green; color: white;">সবুজ</button>
+  <button class="color-btn" style="background-color: blue; color: white;">নীল</button>
+  <button class="color-btn" style="background-color: yellow; color: black;">হলুদ</button>
+
+
+  <script>
+    let buttons = document.querySelectorAll(".color-btn");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        let color = button.style.backgroundColor;
+        document.body.style.backgroundColor = color;
+      });
+    });
+  </script>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1 id="line1">I love Asha</h1>
+  <h1 id="line2">she did't love me</h1>
+  <button id="check">Click</button>
+</body>
+<script>
+  let clickButton = document.querySelector("#check");
+  let line1 = document.querySelector("#line1");
+  let line2 = document.querySelector("#line2");
+
+
+  clickButton.addEventListener("click", () => {
+    console.log("Button clicked!");
+    line1.textContent = "Asha is my dream";
+    line2.textContent = "But life is different";
+  })
+</script>
+
+</html>

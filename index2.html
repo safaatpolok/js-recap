@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Dynamic List Creator</title>
+  <style>
+    body {
+      font-family: Arial;
+      max-width: 500px;
+      margin: 50px auto;
+      text-align: center;
+    }
+
+    #itemList {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #itemList li {
+      background-color: #f4f4f4;
+      margin: 10px 0;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .delete-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    input {
+      padding: 10px;
+      width: 60%;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: green;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>আমার লিস্ট</h1>
+  <input type="text" id="itemInput" placeholder="নতুন আইটেম লিখুন">
+  <button id="addBtn">যোগ করুন</button>
+
+  <ul id="itemList"></ul>
+
+  <script>
+    // Elements select করা
+    const input = document.getElementById("itemInput");
+    const addBtn = document.getElementById("addBtn");
+    const itemList = document.getElementById("itemList");
+
+    // Add Item Function
+    function addItem() {
+      const itemText = input.value.trim();
+
+      // Empty input check
+      if (itemText === "") {
+        alert("দয়া করে কিছু লিখুন");
+        return;
+      }
+
+      // New List Item Create
+      const li = document.createElement("li");
+
+      // Text span
+      const textSpan = document.createElement("span");
+      textSpan.textContent = itemText;
+
+      // Delete Button
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "মুছুন";
+      deleteBtn.classList.add("delete-btn");
+
+      // Delete Functionality
+      deleteBtn.addEventListener("click", () => {
+        itemList.removeChild(li);
+      });
+
+      // Li তে elements যোগ করা
+      li.appendChild(textSpan);
+      li.appendChild(deleteBtn);
+
+      // List এ যোগ করা
+      itemList.appendChild(li);
+
+      // Input clear করা
+      input.value = "";
+    }
+
+    // Button Click Event
+    addBtn.addEventListener("click", addItem);
+
+    // Enter Key Support
+    input.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        addItem();
+      }
+    });
+  </script>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator App</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+    }
+
+    .calculator {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 350px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #4facfe;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+      background: #4facfe;
+      color: white;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #2196f3;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #222;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="calculator">
+
+    <h1>Calculator</h1>
+
+    <input type="text" id="firstNumber" placeholder="Enter first number">
+
+    <input type="text" id="secondNumber" placeholder="Enter second number">
+
+    <div class="buttons">
+      <button id="add">+</button>
+      <button id="sub">-</button>
+      <button id="mul">*</button>
+      <button id="div">/</button>
+    </div>
+
+    <div id="result">Result: 0</div>
+
+  </div>
+
+  <script>
+
+    let firstNumber = document.querySelector("#firstNumber");
+    let secondNumber = document.querySelector("#secondNumber");
+
+    let addBtn = document.querySelector("#add");
+    let subBtn = document.querySelector("#sub");
+    let mulBtn = document.querySelector("#mul");
+    let divBtn = document.querySelector("#div");
+
+    let resultDiv = document.querySelector("#result");
+
+    // Function to get numbers
+    function getNumbers() {
+
+      let num1 = parseFloat(firstNumber.value);
+      let num2 = parseFloat(secondNumber.value);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultDiv.textContent = "Please enter valid numbers";
+        return null;
+      }
+
+      return { num1, num2 };
+    }
+
+    // Addition
+    addBtn.addEventListener("click", function () {
+
+      let numbers = getNumbers();
+
+      if (!numbers) return;
+
+      let result = numbers.num1 + numbers.num2;
+
+      resultDiv.textContent = "Result: " + result;
+
+    });
+
+    // Subtraction
+    subBtn.addEventListener("click", function () {
+
+      let numbers = getNumbers();
+
+      if (!numbers) return;
+
+      let result = numbers.num1 - numbers.num2;
+
+      resultDiv.textContent = "Result: " + result;
+
+    });
+
+    // Multiplication
+    mulBtn.addEventListener("click", function () {
+
+      let numbers = getNumbers();
+
+      if (!numbers) return;
+
+      let result = numbers.num1 * numbers.num2;
+
+      resultDiv.textContent = "Result: " + result;
+
+    });
+
+    // Division
+    divBtn.addEventListener("click", function () {
+
+      let numbers = getNumbers();
+
+      if (!numbers) return;
+
+      if (numbers.num2 === 0) {
+        resultDiv.textContent = "Cannot divide by zero";
+        return;
+      }
+
+      let result = numbers.num1 / numbers.num2;
+
+      resultDiv.textContent = "Result: " + result;
+
+    });
+
+  </script>
+
+</body>
+
+</html>

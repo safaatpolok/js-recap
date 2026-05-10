@@ -1,0 +1,170 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>My ToDo List</h1>
+    <input type="text" id="taskInput" placeholder="add new task">
+    <button id="addBtn">Add</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        let input = document.querySelector("#taskInput");
+        let addBtn = document.querySelector("#addBtn");
+        let taskList = document.querySelector("#taskList");
+
+        addBtn.addEventListener("click", () => {
+            let taskText = input.value;
+
+            if (taskText === "") {
+                alert("add something");
+                return;
+            }
+            let li = document.createElement("li");
+            li.textContent = taskText;
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "remove";
+            deleteBtn.style.marginLeft = "10px";
+
+            deleteBtn.addEventListener("click", () => {
+                li.remove();
+            });
+            li.appendChild(deleteBtn);
+            taskList.appendChild(li);
+
+            // Input খালি করা
+            input.value = "";
+
+        });
+        input.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                addBtn.click();
+            }
+        });
+    </script>
+</body>
+
+</html> -->
+
+<!-- ex-2: -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #count {
+            font-size: 50px;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Counter</h1>
+    <div id="count">0</div>
+    <button id="decreaseBtn">-</button>
+    <button id="resetBtn">Reset</button>
+    <button id="increaseBtn">+</button>
+
+    <script>
+        let countDisplay = document.querySelector("#count");
+        let decreaseBtn = document.querySelector("#decreaseBtn");
+        let resetBtn = document.querySelector("#resetBtn");
+        let increaseBtn = document.querySelector("#increaseBtn");
+
+        let count = 0;
+
+        increaseBtn.addEventListener("click", () => {
+            count++;
+            countDisplay.textContent = count;
+        });
+        decreaseBtn.addEventListener("click", () => {
+            count--;
+            countDisplay.textContent = count;
+        });
+        resetBtn.addEventListener("click", () => {
+            count = 0;
+            countDisplay.textContent = count;
+        })
+    </script>
+</body>
+
+</html>
+  -->
+<!-- ex-3 -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            transition: background-color 0.3s;
+        }
+
+        .color-btn {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>রং পরিবর্তন করুন</h1>
+    <button class="color-btn" style="background-color: red; color: white;">লাল</button>
+    <button class="color-btn" style="background-color: green; color: white;">সবুজ</button>
+    <button class="color-btn" style="background-color: blue; color: white;">নীল</button>
+    <button class="color-btn" style="background-color: yellow; color: black;">হলুদ</button>
+
+
+    <script>
+        let buttons = document.querySelectorAll(".color-btn");
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                let color = button.style.backgroundColor;
+                document.body.style.backgroundColor = color;
+            });
+        });
+    </script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>hello</h1>
+</body>
+
+</html>
