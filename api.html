@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .user-card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+
+    .loading {
+      color: blue;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>User List</h1>
+  <button id="loadBtn">Load Users</button>
+  <div id="userContainer"></div>
+  <script>
+    let loadBtn = document.querySelector("#loadBtn");
+    let container = document.querySelector("#userContainer");
+
+    async function loadUseres() {
+      try {
+        container.innerHTML = '<p class="loading">loading... </p>';
+
+        let response = await fetch('https://jsonplaceholder.typicode.com/users');
+
+        if (!response.ok) {
+          throw new Error('Faild to load');
+        }
+        let users = await response.json();
+
+        container.innerHTML = '';
+
+        users.forEach(user => {
+          let card = document.createElement('div');
+          card.className = 'user-card';
+
+          card.innerHTML = ` 
+          <h3>${user.name}</h3>
+                        <p>Email: ${user.email}</p>
+                        <p>Phone: ${user.phone}</p>
+                        <p>City: ${user.address.city}</p>
+          `;
+          container.appendChild(card);
+        });
+      } catch (error) {
+        container.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+      };
+
+    }
+    loadBtn.addEventListener('click', loasUsers);
+
+
+
+
+  </script>
+
+</body>
+
+</html>
